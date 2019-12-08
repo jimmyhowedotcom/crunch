@@ -1,0 +1,33 @@
+#!/usr/bin/php
+<?php
+
+if ( php_sapi_name() !== 'cli' )
+{
+	exit;
+}
+
+mkdir('out');
+
+// The php.ini setting phar.readonly must be set to 0
+$pharFile = 'out/crunch.phar';
+
+
+if (file_exists($pharFile)) {
+	unlink($pharFile);
+}
+if (file_exists($pharFile . '.gz')) {
+	unlink($pharFile . '.gz');
+}
+
+$phar = new Phar($pharFile);
+
+$phar->buildFromDirectory('src/');
+
+$phar->setDefaultStub('cli.php', 'web/index.php');
+//$phar->setDefaultStub('index.php', '/index.php');
+
+$phar->compress(Phar::GZ);
+
+echo "$pharFile successfully created!";
+
+
