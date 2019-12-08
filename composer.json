@@ -1,5 +1,6 @@
 {
     "name": "jimmyhowedotcom/crunch",
+    "minimum-stability": "dev",
     "type": "library",
     "description": "Allows for compressing various files and folders to phar, zip and gzip.",
     "keywords": [
